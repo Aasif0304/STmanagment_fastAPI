@@ -11,7 +11,6 @@ def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(oauth2_scheme)
 ):
     token = credentials.credentials
-
     user_data = verify_access_token(token)
 
     if not user_data:
@@ -22,3 +21,15 @@ def get_current_user(
         )
 
     return user_data
+
+
+def require_admin(
+    current_user: dict = Depends(get_current_user)
+):
+    if current_user.get("role") != "ADMIN":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Admin access required"
+        )
+
+    return current_user

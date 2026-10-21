@@ -11,6 +11,7 @@ class Student(Base):
     age = Column(Integer, nullable=False)
     course = Column(String(100), nullable=False)
     is_deleted = Column(Boolean, default=False, nullable=False)
+    img_URL=Column(String(255),nullable=True)
 
     fee_id = Column(Integer, nullable=True)
     total_fees = Column(Integer, nullable=True)
