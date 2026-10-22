@@ -15,6 +15,7 @@ router = APIRouter(prefix="/students", tags=["Students"])
 
 @router.post("/")
 def create_student(
+    
     name: str,
     age: int,
     course: str,
@@ -158,7 +159,7 @@ def upload_student_image(
         with file_path.open("wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
 
-        student.img_url = f"http://127.0.0.1:8000/img/{filename}"
+        student.img_URL = f"http://127.0.0.1:8000/img/{filename}"
 
         db.commit()
         db.refresh(student)
@@ -166,7 +167,7 @@ def upload_student_image(
         return {
             "message": "Student image uploaded successfully",
             "student_id": student.id,
-            "img_url": student.img_url
+            "img_url": student.img_URL
         }
 
     except Exception:
